@@ -1,14 +1,24 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://6811d8583ac96f7119a5ce1a.mockapi.io';
+// axios.defaults.baseURL = 'https://6811d8583ac96f7119a5ce1a.mockapi.io';
+axios.defaults.baseURL = 'https:connections-api.goit.global';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get('/contacts');
-      return response.data;
+  async (dispatch, getState) => {
+      try {
+        const state = getState();
+    const token = state.auth.token;
+
+          if (!token) throw new Error('No auth token'); 
+          
+         const response = await axios.get('/contacts', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }); 
+    //   return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
