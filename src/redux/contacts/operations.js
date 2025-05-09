@@ -2,7 +2,9 @@ import axios from 'axios';
 import { setAuthHeader } from '../../redux/auth/operations';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
-axios.defaults.baseURL = 'https://connections-api.goit.global';
+// axios.defaults.baseURL = 'https://connections-api.goit.global';
+console.log(import.meta.env.VITE_API_URL);
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 export const clearAuthHeader = () => {
   delete axios.defaults.headers.common.Authorization;
