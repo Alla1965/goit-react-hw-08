@@ -16,8 +16,12 @@ const formatPhone = (phone) => {
 };
 export const Contact = ({ contact }) => {
   const dispatch = useDispatch();
+
   const handleDelete = () => {
-	  dispatch(deleteContact(contact.id))
+    const confirmDelete = window.confirm('Ви впевнені, що хочете видалити контакт?');
+    if (confirmDelete) {
+      dispatch(deleteContact(contact.id))
+    }
   };
    return (
     <div className={css.wrapper}>

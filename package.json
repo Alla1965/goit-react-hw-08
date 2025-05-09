@@ -13,10 +13,16 @@
     "@reduxjs/toolkit": "^2.7.0",
     "axios": "^1.9.0",
     "clsx": "^2.1.1",
+    "formik": "^2.4.6",
+    "node-fetch": "^3.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-helmet": "^6.1.0",
+    "react-hot-toast": "^2.5.2",
     "react-redux": "^9.2.0",
-    "redux-persist": "^6.0.0"
+    "react-router-dom": "^7.5.3",
+    "redux-persist": "^6.0.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

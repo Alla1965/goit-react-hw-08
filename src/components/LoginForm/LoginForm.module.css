@@ -1,0 +1,23 @@
+.formLogin {
+  width: 320px;
+}
+
+.labelLogin {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  font-size: 24px;
+  height: 60px;
+  background-color: white;
+}
+.btnLogin {
+  width: 150px;
+  height: 40px;
+  border-color: black;
+  border-radius: 6px;
+  font-size: 24px;
+}
+.loginInput {
+  height: 40px;
+  background-color: white;
+}

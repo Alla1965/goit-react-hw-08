@@ -12,9 +12,15 @@ export const ContactForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault(); 
     const form = event.target;
-  
+      const contact = {
+    name: form.elements.name.value,
+    number: form.elements.number.value,
+  };
+    if (!contact.name.trim() || !contact.number.trim()) {
+    alert('Please fill in both name and number');
+    return;
+  }
     dispatch(addContact({
-	    id: crypto.randomUUID(),
 	 
         name: form.elements.name.value,
         number: form.elements.number.value

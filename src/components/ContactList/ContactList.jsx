@@ -4,8 +4,10 @@ import { selectFilteredContacts } from '../../redux/contacts/slice';
 import { Contact } from '../Contact/Contact';
 import css from './ContactList.module.css';
 
+
 export const ContactList = () => {
   const contacts  = useSelector(selectFilteredContacts);
+console.log(contacts);
 
   if (!Array.isArray(contacts)) {
     return <p className={css.message}>Контакти недоступні або ще не завантажені.</p>;
