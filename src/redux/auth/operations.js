@@ -22,7 +22,7 @@ export const register = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
-      if (error === 'Request failed with status code 400') {
+      if (error.response?.status === 400) {
         alert('Користувач із такою email-адресою вже існує.');
       } else {
         console.error('Registration failed:', error);
@@ -39,11 +39,8 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
-    console.log(login);
     try {
       const res = await axios.post('/users/login', credentials);
-      console.log(res);
-      console.log(res.data);
 
       setAuthHeader(res.data.token);
       return res.data;
@@ -67,10 +64,9 @@ export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const token = state.auth.token;
-    console.log(token);
+    let token = state.auth.token;
 
-    if (!token) {
+    if (!token && typeof localStorage !== 'undefined') {
       token = localStorage.getItem('token');
       if (!token) {
         return thunkAPI.rejectWithValue('Unable to fetch user');

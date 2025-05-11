@@ -6,8 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import css from './LoginForm.module.css'
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email('Невірний email').required('Обовʼязково'),
-  password: Yup.string().min(6, 'Мінімум 6 символів').required('Обовʼязково'),
+  email: Yup.string()
+    .email('Невірний email')
+    .required('Обовʼязково'),
+  password: Yup.string()
+    .min(6, 'Мінімум 6 символів')
+    .required('Обовʼязково'),
 });
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -34,25 +38,28 @@ export const LoginForm = () => {
 
   //   form.reset();
   // };
+       // }
 
 
   return (
         <Formik
       initialValues={{ email: '', password: '' }}
       validationSchema={LoginSchema}
-      onSubmit={(values, { resetForm }) => {
-        dispatch(login(values))
-          .unwrap()
-          .then(() => {
-            console.log('login success');
-            navigate('/contacts');
-          })
-          .catch(() => {
-            console.log('login error');
-          });
-        resetForm();
+      onSubmit={async (values, { resetForm, setStatus }) => {
+        try {
+          console.log('Login values:', values);
+          await dispatch(login(values)).unwrap();
+          resetForm();
+          navigate('/contacts');
+          
+        } catch (error) {
+          setStatus('Невірний email або пароль');
+        }
+         
+        
       }}
     >
+       {({ status }) => (
     <Form className={css.formLogin}  autoComplete="off">
       <label className={css.labelLogin}>
         Email
@@ -64,8 +71,10 @@ export const LoginForm = () => {
           <Field  className={css.loginInput} type="password" name="password" autoComplete="current-password" />
           <ErrorMessage name="password" component="div" className={css.error} />
       </label>
-      <button className={css.btnLogin}type="submit">Log In</button>
-      </Form>
+          <button className={css.btnLogin} type="submit">Log In</button>
+              {status && <div className={css.error}>{status}</div>}
+        </Form>
+         )}
       </Formik>
   );
 };

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'; //4
 import { AppBar } from '../AppBar/AppBar';
 import PrivateRoute from '../PrivateRoute';
 import { Toaster } from 'react-hot-toast';
-
 import { RestrictedRoute } from '../RestrictedRoute';
 import { refreshUser } from '../../redux/auth/operations';
 import { selectIsRefreshing } from '../../redux/auth/selectors';

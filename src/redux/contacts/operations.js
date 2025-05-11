@@ -14,7 +14,7 @@ export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const token = state.auth.token;
+    const token = state.auth.token || localStorage.getItem('token');
 
     if (!token) return thunkAPI.rejectWithValue('No auth token');
     setAuthHeader(token);
@@ -34,7 +34,7 @@ export const addContact = createAsyncThunk(
   async (contact, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const token = state.auth.token;
+      const token = state.auth.token || localStorage.getItem('token');
       if (!token) {
         return thunkAPI.rejectWithValue('No auth token');
       }

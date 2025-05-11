@@ -20,15 +20,7 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  // initialState: {
-  //   user: {
-  //     name: null,
-  //     email: null,
-  //   },
-  //   token: null,
-  //   isLoggedIn: false,
-  //   isRefreshing: false,
-  // },
+
   extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -36,13 +28,12 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
         setAuthHeader(action.payload.token);
+        localStorage.setItem('token', action.payload.token);
       })
       .addCase(login.fulfilled, (state, action) => {
-        console.log('Login fulfilled payload:', action.payload); // ← додай це
+        console.log('Login fulfilled payload:', action.payload);
         state.user = action.payload.user;
         state.token = action.payload.token;
-        console.log(state.token);
-
         state.isLoggedIn = true;
         setAuthHeader(action.payload.token);
         localStorage.setItem('token', action.payload.token);
@@ -52,6 +43,7 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
         clearAuthHeader();
+        localStorage.removeItem('token');
       })
       .addCase(refreshUser.pending, state => {
         state.isRefreshing = true;
