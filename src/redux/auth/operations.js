@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 // axios.defaults.baseURL = 'https://connections-api.goit.global';
 console.log(import.meta.env.VITE_API_URL);
+console.log('BASE_URL from env:', import.meta.env.VITE_API_URL);
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 export const setAuthHeader = token => {
