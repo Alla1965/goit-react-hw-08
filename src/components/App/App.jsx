@@ -35,9 +35,29 @@ const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="login" element={<LoginPage />} />
-              <Route path="register" element={<RegistrationPage />} />
+              <Route index element={<HomePage />} />
+              
+
+            {/* <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegistrationPage />} /> */}
+
+              <Route
+  path="login"
+  element={
+    <RestrictedRoute>
+      <LoginPage />
+    </RestrictedRoute>
+  }
+/>
+<Route
+  path="register"
+  element={
+    <RestrictedRoute>
+      <RegistrationPage />
+    </RestrictedRoute>
+  }
+/>
+
           
             <Route path="/contacts" element={
   <PrivateRoute>

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   register,
   login,
-  logout,
+  logOut,
   refreshUser,
   setAuthHeader,
   clearAuthHeader,
@@ -38,7 +38,7 @@ const authSlice = createSlice({
         setAuthHeader(action.payload.token);
         localStorage.setItem('token', action.payload.token);
       })
-      .addCase(logout.fulfilled, state => {
+      .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;
